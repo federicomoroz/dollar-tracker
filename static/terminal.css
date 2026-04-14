@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --g-hi:   #39ff14;
+  --g-mid:  #20c020;
+  --g-dim:  #147814;
+  --g-mute: #0d500d;
+  --bg:     #080808;
+  --bg-alt: #0c0f0c;
+  --glow:   0 0 10px #39ff1466, 0 0 2px #39ff1488;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+  color: var(--g-mid);
+}
+
+/* ── Custom topbar ── */
+#docs-topbar {
+  position: sticky; top: 0; z-index: 200;
+  background: #000;
+  border-bottom: 1px solid var(--g-mute);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 24px;
+}
+#back-btn {
+  color: var(--g-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  text-decoration: none;
+  border: 1px solid var(--g-mute);
+  padding: 4px 12px;
+  white-space: nowrap;
+  transition: all 0.1s;
+}
+#back-btn:hover {
+  color: var(--g-hi);
+  border-color: var(--g-dim);
+  background: rgba(57,255,20,0.05);
+}
+#docs-title {
+  color: var(--g-dim);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+}
+
+/* ── Hide default Swagger topbar ── */
+.swagger-ui .topbar { display: none !important; }
+
+/* ── RESET: strip all native browser button styling ── */
+.swagger-ui button {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer;
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+/* ── Wrapper ── */
+.swagger-ui {
+  font-family: 'Share Tech Mono', monospace !important;
+  background: var(--bg) !important;
+  color: var(--g-mid) !important;
+}
+.swagger-ui .wrapper { padding: 0 16px !important; }
+
+/* ── Info block ── */
+.swagger-ui .info {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--g-mute) !important;
+  padding: 20px 24px !important;
+  margin-bottom: 12px;
+}
+.swagger-ui .info .title {
+  font-family: 'VT323', monospace !important;
+  font-size: 2.2rem !important;
+  color: var(--g-hi) !important;
+  text-shadow: var(--glow) !important;
+  letter-spacing: 3px;
+  line-height: 1;
+}
+.swagger-ui .info .title small { display: none; }
+.swagger-ui .info p,
+.swagger-ui .info li { color: var(--g-dim) !important; font-size: 0.82rem !important; }
+.swagger-ui .info a { color: var(--g-mid) !important; }
+.swagger-ui .info .version {
+  background: transparent !important;
+  border: 1px solid var(--g-mute) !important;
+  color: var(--g-dim) !important;
+  font-size: 0.72rem !important;
+}
+
+/* ── Scheme container ── */
+.swagger-ui .scheme-container {
+  background: var(--bg-alt) !important;
+  border-bottom: 1px solid var(--g-mute) !important;
+  box-shadow: none !important;
+  padding: 8px 16px !important;
+}
+
+/* ── Tags ── */
+.swagger-ui .opblock-tag {
+  font-family: 'VT323', monospace !important;
+  font-size: 1.4rem !important;
+  color: var(--g-hi) !important;
+  letter-spacing: 3px;
+  border-bottom: 1px solid var(--g-mute) !important;
+  padding: 6px 4px !important;
+  margin: 8px 0 4px !important;
+}
+.swagger-ui .opblock-tag:hover { background: rgba(57,255,20,0.03) !important; }
+.swagger-ui .opblock-tag small { color: var(--g-dim) !important; font-size: 0.78rem !important; }
+
+/* ── Operation blocks ── */
+.swagger-ui .opblock {
+  background: var(--bg-alt) !important;
+  border: 1px solid var(--g-mute) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin: 3px 0 !important;
+}
+.swagger-ui .opblock.is-open { border-color: var(--g-dim) !important; }
+
+/* Summary row — force horizontal flex */
+.swagger-ui .opblock .opblock-summary {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  background: transparent !important;
+  border-bottom: none !important;
+  padding: 6px 10px !important;
+  gap: 10px;
+}
+.swagger-ui .opblock.is-open .opblock-summary {
+  border-bottom: 1px solid var(--g-mute) !important;
+}
+.swagger-ui .opblock-summary-control {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 !important;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Method badge */
+.swagger-ui .opblock-summary-method {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  border-radius: 0 !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.72rem !important;
+  font-weight: normal !important;
+  letter-spacing: 1px;
+  width: 64px !important;
+  min-width: 64px !important;
+  flex-shrink: 0 !important;
+  padding: 3px 0 !important;
+  text-align: center;
+  background: transparent !important;
+  border: 1px solid currentColor !important;
+  box-shadow: none !important;
+}
+.swagger-ui .opblock.opblock-post   .opblock-summary-method { color: var(--g-hi)  !important; }
+.swagger-ui .opblock.opblock-get    .opblock-summary-method { color: #00d4ff !important; }
+.swagger-ui .opblock.opblock-delete .opblock-summary-method { color: #ff5050 !important; }
+.swagger-ui .opblock.opblock-put    .opblock-summary-method { color: #ffaa00 !important; }
+.swagger-ui .opblock.opblock-patch  .opblock-summary-method { color: #ff8c00 !important; }
+
+/* Path */
+.swagger-ui .opblock-summary-path,
+.swagger-ui .opblock-summary-path__deprecated {
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.88rem !important;
+  flex-shrink: 1 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.swagger-ui .opblock-summary-description {
+  color: var(--g-dim) !important;
+  font-size: 0.78rem !important;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Expand arrow */
+.swagger-ui .arrow { fill: var(--g-dim) !important; width: 14px !important; height: 14px !important; }
+.swagger-ui .expand-methods svg,
+.swagger-ui .expand-operation svg { fill: var(--g-dim) !important; }
+
+/* Copy icon */
+.swagger-ui .copy-to-clipboard { opacity: 0.2 !important; }
+.swagger-ui .copy-to-clipboard:hover { opacity: 0.5 !important; }
+
+/* ── Block body ── */
+.swagger-ui .opblock-body,
+.swagger-ui .opblock-description-wrapper,
+.swagger-ui .opblock-section-header { background: var(--bg) !important; }
+.swagger-ui .opblock-section-header {
+  border-bottom: 1px solid var(--g-mute) !important;
+  box-shadow: none !important;
+  padding: 6px 12px !important;
+}
+.swagger-ui .opblock-section-header h4,
+.swagger-ui .opblock-section-header label {
+  color: var(--g-dim) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Try it out / Cancel buttons ── */
+.swagger-ui .try-out__btn {
+  border: 1px solid var(--g-mute) !important;
+  color: var(--g-dim) !important;
+  padding: 3px 10px !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.swagger-ui .try-out__btn:hover {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.04) !important;
+}
+.swagger-ui .try-out__btn.cancel {
+  border-color: #993333 !important;
+  color: #ff5050 !important;
+}
+
+/* ── Action buttons (.btn) ── */
+.swagger-ui .btn {
+  border: 1px solid var(--g-dim) !important;
+  border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 1px;
+  padding: 5px 14px !important;
+  text-transform: uppercase;
+  transition: all 0.1s;
+}
+.swagger-ui .btn:hover {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.05) !important;
+}
+.swagger-ui .btn.execute {
+  border-color: var(--g-mid) !important;
+  color: var(--g-hi) !important;
+  background: rgba(57,255,20,0.08) !important;
+}
+.swagger-ui .btn.execute:hover { background: rgba(57,255,20,0.15) !important; }
+.swagger-ui .btn.cancel {
+  border-color: #993333 !important;
+  color: #ff5050 !important;
+}
+.swagger-ui .btn.cancel:hover { background: rgba(255,50,50,0.06) !important; }
+
+/* ── Parameters table ── */
+.swagger-ui .parameter__name { color: var(--g-mid) !important; font-size: 0.85rem !important; }
+.swagger-ui .parameter__type,
+.swagger-ui .parameter__in { color: var(--g-dim) !important; font-size: 0.75rem !important; }
+.swagger-ui table thead tr th,
+.swagger-ui table thead tr td {
+  color: var(--g-dim) !important;
+  border-bottom: 1px solid var(--g-mute) !important;
+  font-size: 0.72rem !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 5px 10px !important;
+  background: transparent !important;
+}
+.swagger-ui table tbody tr td {
+  color: var(--g-mid) !important;
+  border-bottom: 1px solid rgba(20,120,20,0.12) !important;
+  background: transparent !important;
+  padding: 5px 10px !important;
+}
+.swagger-ui .required { color: #ff5050 !important; }
+
+/* ── Inputs ── */
+.swagger-ui input[type=text],
+.swagger-ui input[type=password],
+.swagger-ui input[type=search],
+.swagger-ui textarea,
+.swagger-ui select {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: #050505 !important;
+  border: 1px solid var(--g-mute) !important;
+  border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.85rem !important;
+  outline: none !important;
+  padding: 5px 8px !important;
+}
+.swagger-ui input:focus,
+.swagger-ui textarea:focus { border-color: var(--g-dim) !important; }
+
+/* ── Responses ── */
+.swagger-ui .responses-inner h4,
+.swagger-ui .responses-inner h5 { color: var(--g-dim) !important; font-size: 0.72rem !important; }
+.swagger-ui .response-col_status { color: var(--g-mid) !important; font-size: 0.85rem !important; }
+.swagger-ui .response-col_description,
+.swagger-ui .response-col_links { color: var(--g-dim) !important; }
+
+/* ── Code blocks ── */
+.swagger-ui .microlight,
+.swagger-ui pre,
+.swagger-ui code,
+.swagger-ui .body-param__text {
+  background: #030503 !important;
+  border: 1px solid var(--g-mute) !important;
+  border-radius: 0 !important;
+  color: var(--g-mid) !important;
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.8rem !important;
+}
+
+/* ── Schemas (collapsed by default) ── */
+.swagger-ui section.models {
+  border: 1px solid var(--g-mute) !important;
+  background: var(--bg-alt) !important;
+}
+.swagger-ui section.models h4 {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.8rem !important;
+  color: var(--g-mid) !important;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: none !important;
+}
+.swagger-ui section.models.is-open h4 { border-bottom: 1px solid var(--g-mute) !important; }
+.swagger-ui .model-box { background: var(--bg) !important; border: 1px solid var(--g-mute) !important; }
+.swagger-ui .model,
+.swagger-ui .model .property,
+.swagger-ui .model-title { color: var(--g-dim) !important; font-family: 'Share Tech Mono', monospace !important; font-size: 0.8rem !important; }
+.swagger-ui .prop-type  { color: #00aacc !important; }
+.swagger-ui .model-hint { display: none !important; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; background: #000; }
+::-webkit-scrollbar-thumb { background: var(--g-mute); }
+::-webkit-scrollbar-thumb:hover { background: var(--g-dim); }
+
+/* ── Links ── */
+.swagger-ui a { color: var(--g-mid) !important; }
+.swagger-ui a:hover { color: var(--g-hi) !important; }
+
+/* ── Misc ── */
+.swagger-ui select { color: var(--g-mid) !important; }
+.swagger-ui label { color: var(--g-dim) !important; font-size: 0.78rem !important; }
+.swagger-ui .dialog-ux .modal-ux {
+  background: var(--bg) !important;
+  border: 1px solid var(--g-dim) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.swagger-ui .dialog-ux .modal-ux-header {
+  border-bottom: 1px solid var(--g-mute) !important;
+  background: var(--bg-alt) !important;
+}
+.swagger-ui .dialog-ux .modal-ux-header h3 {
+  color: var(--g-hi) !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.6rem !important;
+}

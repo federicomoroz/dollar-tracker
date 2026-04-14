@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: dollar-tracker
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SENDGRID_API_KEY
+        sync: false
+      - key: SENDER_EMAIL
+        sync: false
+      - key: FETCH_INTERVAL_MINUTES
+        value: "60"
+      - key: ALERT_COOLDOWN_HOURS
+        value: "4"
