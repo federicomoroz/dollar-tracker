@@ -18,7 +18,20 @@ A production-ready FastAPI backend that tracks Argentine dollar exchange rates a
 
 ---
 
+## Quick start (Docker)
+
+```bash
+cp .env.example .env   # fill in SENDGRID_API_KEY and SENDER_EMAIL
+docker compose up --build
+```
+
+Opens on `http://localhost:8000`. PostgreSQL is provisioned automatically.
+
+---
+
 ## Running locally
+
+**Prerequisites:** Python 3.10+, PostgreSQL
 
 ```bash
 git clone https://github.com/federicomoroz/dollar-tracker.git
@@ -27,8 +40,8 @@ cd dollar-tracker
 pip install -r requirements.txt
 
 cp .env.example .env
-# Fill in SENDGRID_API_KEY and SENDER_EMAIL in .env
-# (alerts and reports are silently skipped if these are absent)
+# Set DATABASE_URL, SENDGRID_API_KEY, and SENDER_EMAIL
+# (alerts and reports are silently skipped if email vars are absent)
 
 uvicorn main:app --reload
 ```
@@ -47,6 +60,7 @@ curl -X POST http://localhost:8000/rates/fetch
 
 | Variable | Default | Purpose |
 |---|---|---|
+| `DATABASE_URL` | `postgresql://postgres:postgres@localhost:5432/dollar_tracker` | PostgreSQL connection string |
 | `SENDGRID_API_KEY` | — | Required for email delivery |
 | `SENDER_EMAIL` | — | From-address for all outbound emails |
 | `FETCH_INTERVAL_MINUTES` | `60` | How often the scheduler fetches new rates |
@@ -124,7 +138,7 @@ HTTP Request
 
 **Core** (`app/core/`) provides infrastructure to every layer without depending on any of them:
 - `config.py` — reads env vars, exposes typed constants
-- `database.py` — SQLite engine, session factory, FastAPI `get_db()` dependency
+- `database.py` — PostgreSQL engine, session factory, FastAPI `get_db()` dependency
 - `scheduler.py` — APScheduler background job that drives the full pipeline on each tick
 
 **Composition root** (`app/main.py`) is the only place that wires everything together: creates the FastAPI instance, registers routers, mounts static files, and manages the scheduler lifecycle.
@@ -244,8 +258,8 @@ Set `SENDGRID_API_KEY` and `SENDER_EMAIL` in Render's Environment dashboard. Eve
 
 ## Requirements
 
-Python 3.10+. No external database required (SQLite, file-based).
+Python 3.10+, PostgreSQL.
 
 ```
-fastapi, uvicorn, sqlalchemy, httpx, sendgrid, apscheduler, pydantic[email], aiofiles
+fastapi, uvicorn, sqlalchemy, psycopg2-binary, httpx, sendgrid, apscheduler, pydantic[email], aiofiles
 ```
