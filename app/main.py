@@ -11,11 +11,10 @@ from app.controllers import alerts, pages, rates, reports
 
 logging.basicConfig(level=logging.INFO)
 
-Base.metadata.create_all(bind=engine)
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
     start_scheduler()
     yield
     stop_scheduler()
